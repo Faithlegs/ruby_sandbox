@@ -1,6 +1,6 @@
-contents_array = [[1,"Enter the Sunset",       4],
+contents_array = [[1,"Enter Sunset",           4],
 				  [2,"A Wind from the East",  38],
-				  [3,"Nothing to See",        67],
+				  [3,"Nothing Seen",          67],
 				  [4,"Paths Well Trodden",   101],
 				  [5,"Painful Truth",        130],
 				  [6,"Deepest Green",        169],

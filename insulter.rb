@@ -1,0 +1,1 @@
+puts [["fuck",'screw','sod','bugger','forget','bone'].sample,['him','you','them','her','the government','me'].sample].join(' ')
