@@ -14,13 +14,13 @@ require 'open-uri'
 
 def fetch_title
   command_args = ARGV
-  if !command_args.empty?
-    title = command_args[0].split('_').each(&capitalize!).join('_')
+  if command_args.length > 0
+    title = command_args[0].split('_').each(&:capitalize!).join('_')
   else
     puts 'Enter the page you would like to view:'
     title = STDIN.gets.chomp
     title = title.split(' ')
-    title = title.each(&capitalize!).join('_')
+    title = title.each(&:capitalize!).join('_')
   end
   title
 end
@@ -59,7 +59,7 @@ def strip_text
   @paragraphs = @wiki_page.xpath('//p')
   raw_text = @paragraphs.map { |x| x.to_s.gsub(/\<[^\>]+\>/, '') }
   raw_text.map! { |x| x.gsub(/\[[^\]]+\]/, '') }
-  raw_text.reject(&empty?)
+  raw_text.reject(&:empty?)
 end
 
 def set_link_array
@@ -79,6 +79,7 @@ def process_links
   link_array << ' ' if link_array.length.odd?
   link_array
 end
+
 
 def links_to_console(w, center)
   x = 0
@@ -101,7 +102,7 @@ end
 
 def select_link(number)
   link_array = @link_array[@current_p]
-  title = link_array[number-1]
+  title = link_array[number - 1]
   change_article(title)
 end
 
