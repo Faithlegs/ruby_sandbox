@@ -14,7 +14,7 @@ require 'open-uri'
 
 def fetch_title
   command_args = ARGV
-  if command_args.length > 0
+  if command_args && !command_args.empty?
     title = command_args[0].split('_').each(&:capitalize!).join('_')
   else
     puts 'Enter the page you would like to view:'
@@ -64,9 +64,10 @@ end
 
 def set_link_array
   link_array = @paragraphs.map { |paragraph| paragraph.css('a') }
+
   link_array.map { |links|
-	  links.map { |link|
-		  link['href'].gsub(%r{\/wiki\/}, '')
+    links.map { |link|
+      link['href'].gsub(%r{\/wiki\/}, '')
 	  }.reject { |link| /\#cite/.match(link) }
   }
 end
@@ -153,22 +154,17 @@ def process_input(input)
     begin_article
   else
     case input # replace case statement with a hash?
-    when 'links', 'link', 'l'
-      display_links
-    when 'disambiguation', 'disambig', 'dis'
-      disambigufy
-    when '' # check this
-      next_paragraph # add in an if statement here?
-      display_paragraph
+    when 'links', 'link', 'l' then display_links
+    when 'disambiguation', 'disambig', 'dis' then disambigufy
+    when '' # check this?
+      next_paragraph
+      display_paragraph # If statements?
     when 'back', 'b'
       prev_paragraph # add in an if statement here?
       display_paragraph
-    when 'change'
-      initialise
-    when 'exit'
-      exit
-    when 'h', 'help'
-      print_help
+    when 'change' then initialise
+    when 'exit' then exit
+    when 'h', 'help' then print_help
     else
       puts 'Invalid input. Try again or enter -h for options.'
     end
